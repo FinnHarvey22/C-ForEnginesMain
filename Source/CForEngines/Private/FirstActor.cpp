@@ -21,8 +21,8 @@ AFirstActor::AFirstActor()
 	_Arrow->SetupAttachment(_Root);
 
 	_RotatingMovementComponent = CreateDefaultSubobject<URotatingMovementComponent>(TEXT("RotatingMovement"));
-	
+	_RotatingMovementComponent->Deactivate();
+
+
 }
-
-
 
