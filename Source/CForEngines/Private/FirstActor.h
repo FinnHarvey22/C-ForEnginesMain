@@ -1,11 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "FirstActor.generated.h"
 
+class UBoxComponent;
 class URotatingMovementComponent;
 class UArrowComponent;
 
@@ -15,18 +14,26 @@ class CFORENGINES_API AFirstActor : public AActor
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
 	AFirstActor();
 
 protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<USceneComponent> _Root;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<UStaticMeshComponent> _Mesh;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<UArrowComponent> _Arrow;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<URotatingMovementComponent> _RotatingMovementComponent;
+	//UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	//TObjectPtr<URotatingMovementComponent> _RotatingMovementComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TObjectPtr<UBoxComponent> _Collider;
+
+
+	virtual void BeginPlay() override;
+	
+	UFUNCTION()
+	void Handle_ColliderHit( UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit );
 
 
 };
