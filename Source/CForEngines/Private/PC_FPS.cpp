@@ -3,9 +3,21 @@
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Widget_HUD.h"
+#include "Blueprint/UserWidget.h"
 #include "CForEngines/Public/Inputable.h"
 #include "Kismet/KismetSystemLibrary.h"
 
+
+void APC_FPS::BeginPlay()
+{
+   Super::BeginPlay();
+   if(_HUDWidgetClass)
+   {
+      _HUDWidget = CreateWidget<UWidget_HUD, APC_FPS*>( this, _HUDWidgetClass.Get());
+      _HUDWidget->AddToViewport();
+   }
+}
 void APC_FPS::SetupInputComponent()
 {
     Super::SetupInputComponent();
@@ -103,3 +115,6 @@ void APC_FPS::OnPossess(APawn* InPawn)
        }
     }
 }
+
+
+

@@ -23,6 +23,11 @@ protected:
 	TObjectPtr<UInputAction> _JumpAction;
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputAction> _FireAction;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UWidget_HUD> _HUDWidgetClass;
+	TObjectPtr<UWidget_HUD> _HUDWidget;
+	
  
 	virtual void SetupInputComponent() override;
  
@@ -34,4 +39,5 @@ protected:
 	void FireReleased();
  
 	virtual void OnPossess(APawn* InPawn) override;
+	virtual void BeginPlay() override;
 };
