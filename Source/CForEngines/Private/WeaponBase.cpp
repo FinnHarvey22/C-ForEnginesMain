@@ -5,7 +5,7 @@
 AWeaponBase::AWeaponBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
-	_FireDelay = 0.0f;
+	_FireDelay = 0.5f;
 
 
 	_Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
@@ -21,11 +21,17 @@ AWeaponBase::AWeaponBase()
 
 void AWeaponBase::StartFire()
 {
-	Fire();
-	if (_FireDelay != 0.0f)
+	
+	if (!GetWorldTimerManager().IsTimerActive(_FireDelayTimer))
 	{
-		GetWorld()->GetTimerManager().SetTimer(_FireDelayTimer,this, &AWeaponBase::Fire, _FireDelay, true);
+		UE_LOG(LogTemp, Display, TEXT("Debug is working!"));
+		if (_FireDelay != 0.0f)
+		{
+			GetWorld()->GetTimerManager().SetTimer(_FireDelayTimer,this, &AWeaponBase::Fire, _FireDelay, true);
+			Fire();
+		}
 	}
+
 }
 
 void AWeaponBase::StopFire()

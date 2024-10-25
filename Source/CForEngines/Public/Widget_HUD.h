@@ -8,7 +8,7 @@ class UTextBlock;
 class UProgressBar;
  
 UCLASS(Abstract, BlueprintType)
-class C4E_API UWidget_HUD : public UUserWidget
+class CFORENGINES_API UWidget_HUD : public UUserWidget
 {
 	GENERATED_BODY()
  
@@ -22,4 +22,5 @@ private:
 	TObjectPtr<UProgressBar> HealthBar;
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UTextBlock> ScoreText;
+	int currentScore = 0;
 };

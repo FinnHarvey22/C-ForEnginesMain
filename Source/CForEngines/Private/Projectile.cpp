@@ -36,9 +36,10 @@ void AProjectile::Handle_Hit(UPrimitiveComponent* HitComponent, AActor* OtherAct
 		{
 			OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
 
-			Destroy();
+			
 		}
 	}
+	Destroy();
 }
 
 

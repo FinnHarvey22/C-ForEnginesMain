@@ -18,6 +18,13 @@ void APC_FPS::BeginPlay()
       _HUDWidget->AddToViewport();
    }
 }
+
+void APC_FPS::AddPoints_Implementation(int Score)
+{
+   
+   _HUDWidget->UpdateScore(Score);
+}
+
 void APC_FPS::SetupInputComponent()
 {
     Super::SetupInputComponent();
@@ -102,7 +109,8 @@ void APC_FPS::FireReleased()
        }
     }
 }
- 
+
+
 void APC_FPS::OnPossess(APawn* InPawn)
 {
     Super::OnPossess(InPawn);

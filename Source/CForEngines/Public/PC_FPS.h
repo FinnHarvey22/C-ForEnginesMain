@@ -3,14 +3,17 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Controlled.h"
 #include "GameFramework/PlayerController.h"
 #include "PC_FPS.generated.h"
- 
+
+
+class UWidget_HUD;
 struct FInputActionValue;
 class UInputAction;
  
 UCLASS(Abstract)
-class CFORENGINES_API APC_FPS : public APlayerController
+class CFORENGINES_API APC_FPS : public APlayerController, public IControlled
 {
 	GENERATED_BODY()
  
@@ -37,7 +40,9 @@ protected:
 	void JumpReleased();
 	void FirePressed();
 	void FireReleased();
+	
  
 	virtual void OnPossess(APawn* InPawn) override;
 	virtual void BeginPlay() override;
+	virtual void AddPoints_Implementation(int Score) override;
 };

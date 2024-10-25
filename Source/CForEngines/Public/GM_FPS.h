@@ -6,6 +6,7 @@
 
 class UGameRule;
 
+
 UCLASS(Abstract)
 class CFORENGINES_API AGM_FPS : public AGameMode
 {
