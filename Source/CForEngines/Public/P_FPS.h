@@ -10,7 +10,8 @@ class UHealthComponent;
 class UCharacterMovementComponent;
 class UCameraComponent;
 class UCapsuleComponent;
- 
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FPlayerOnHealthChangedSignature,float, newHealth, float, maxHealth, float, changeInHealth);
 UCLASS(Abstract)
 class CFORENGINES_API AP_FPS : public ACharacter, public IInputable
 {
@@ -28,6 +29,8 @@ public:
     
 	virtual UInputMappingContext* GetMappingContext_Implementation() override;
 	void BeginPlay();
+	UPROPERTY(BlueprintAssignable)
+	FPlayerOnHealthChangedSignature OnHealthChangedDelagate;
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)

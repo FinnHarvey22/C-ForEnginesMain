@@ -17,6 +17,9 @@ void APC_FPS::BeginPlay()
       _HUDWidget = CreateWidget<UWidget_HUD, APC_FPS*>( this, _HUDWidgetClass.Get());
       _HUDWidget->AddToViewport();
    }
+
+   
+  
 }
 
 void APC_FPS::AddPoints_Implementation(int Score)
@@ -46,9 +49,11 @@ void APC_FPS::Look(const FInputActionValue& value)
  
     if(APawn* currentPawn = GetPawn())
     {
+       
        if(UKismetSystemLibrary::DoesImplementInterface(currentPawn, UInputable::StaticClass()))
        {
           IInputable::Execute_Input_Look(currentPawn, LookVector);
+          
        }
     }
 }
@@ -110,6 +115,11 @@ void APC_FPS::FireReleased()
     }
 }
 
+void APC_FPS::HealthChanged(float newHealth, float maxHealth, float changeInHealth)
+{
+   _HUDWidget->UpdateHealth(newHealth);
+}
+
 
 void APC_FPS::OnPossess(APawn* InPawn)
 {
@@ -122,6 +132,12 @@ void APC_FPS::OnPossess(APawn* InPawn)
           subsystem->AddMappingContext(IInputable::Execute_GetMappingContext(InPawn), 0);
        }
     }
+
+   APawn* PlayerPawn = InPawn;
+   
+   PlayerPawn->OnHealthChangedDelagate.AddUniqueDynamic(this, &APC_FPS::HealthChanged);
+
+   
 }
 
 

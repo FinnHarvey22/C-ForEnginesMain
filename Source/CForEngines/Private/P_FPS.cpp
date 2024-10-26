@@ -85,5 +85,6 @@ void AP_FPS::Handle_HealthDead(AController* causer)
 
 void AP_FPS::Handle_HealthDamaged(float newHealth, float maxHealth, float changeInHealth)
 {
+	OnHealthChangedDelagate.Broadcast(newHealth,maxHealth,changeInHealth);
 }
 

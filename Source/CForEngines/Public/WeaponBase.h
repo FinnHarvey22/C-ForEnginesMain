@@ -32,7 +32,7 @@ protected:
 	TObjectPtr<UArrowComponent> _Muzzle;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float _FireDelay;
+	float _FireDelay = 0.5f;
 	FTimerHandle _FireDelayTimer;
 	
 	UFUNCTION()

@@ -40,6 +40,7 @@ protected:
 	void JumpReleased();
 	void FirePressed();
 	void FireReleased();
+	void HealthChanged(float newHealth, float maxHealth, float changeInHealth);
 	
  
 	virtual void OnPossess(APawn* InPawn) override;

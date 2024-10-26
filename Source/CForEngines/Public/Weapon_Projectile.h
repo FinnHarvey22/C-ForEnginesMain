@@ -13,6 +13,7 @@ class CFORENGINES_API AWeapon_Projectile : public AWeaponBase
 
 public:
 	virtual void Fire() override;
+	float _FireDelay = 0.5f;
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
