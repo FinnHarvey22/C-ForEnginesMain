@@ -3,9 +3,11 @@
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "P_FPS.h"
 #include "Widget_HUD.h"
 #include "Blueprint/UserWidget.h"
 #include "CForEngines/Public/Inputable.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 
@@ -123,22 +125,25 @@ void APC_FPS::HealthChanged(float newHealth, float maxHealth, float changeInHeal
 
 void APC_FPS::OnPossess(APawn* InPawn)
 {
-    Super::OnPossess(InPawn);
+   Super::OnPossess(InPawn);
  
-    if(UEnhancedInputLocalPlayerSubsystem* subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
-    {
-       if(UKismetSystemLibrary::DoesImplementInterface(InPawn, UInputable::StaticClass()))
-       {
-          subsystem->AddMappingContext(IInputable::Execute_GetMappingContext(InPawn), 0);
-       }
-    }
-
-   APawn* PlayerPawn = InPawn;
-   
-   PlayerPawn->OnHealthChangedDelagate.AddUniqueDynamic(this, &APC_FPS::HealthChanged);
+   if(UEnhancedInputLocalPlayerSubsystem* subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
+   {
+      if(UKismetSystemLibrary::DoesImplementInterface(InPawn, UInputable::StaticClass()))
+      {
+         subsystem->AddMappingContext(IInputable::Execute_GetMappingContext(InPawn), 0);
+      }
+   }
 
    
+   if (AP_FPS* PlayerCharacter = Cast<AP_FPS>(GetPawn()))
+   {
+      PlayerCharacter->OnHealthChangedDelagate.AddUniqueDynamic(this, &APC_FPS::HealthChanged);
+   }
 }
+
+   
+
 
 
 
