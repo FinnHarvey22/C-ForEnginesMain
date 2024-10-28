@@ -119,7 +119,10 @@ void APC_FPS::FireReleased()
 
 void APC_FPS::HealthChanged(float newHealth, float maxHealth, float changeInHealth)
 {
-   _HUDWidget->UpdateHealth(newHealth);
+  float CurrentHealthRatio = (newHealth/maxHealth);
+   
+   _HUDWidget->UpdateHealth(CurrentHealthRatio);
+   
 }
 
 

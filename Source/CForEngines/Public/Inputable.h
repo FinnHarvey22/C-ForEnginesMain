@@ -34,4 +34,7 @@ public:
     
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	UInputMappingContext* GetMappingContext();
+
+	UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
+	UBehaviorTree* GetBehaviorTree();
 };

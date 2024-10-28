@@ -32,6 +32,8 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FPlayerOnHealthChangedSignature OnHealthChangedDelagate;
 
+	virtual UBehaviorTree* GetBehaviorTree_Implementation() override;
+
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<UCameraComponent> _Camera;
@@ -47,6 +49,9 @@ protected:
  
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UInputMappingContext> _InputMapping;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	TObjectPtr<UBehaviorTree> _BehaviourTree;
 
 private:
 	UFUNCTION()

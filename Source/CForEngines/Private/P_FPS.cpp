@@ -79,6 +79,11 @@ void AP_FPS::BeginPlay()
 	}
 }
 
+UBehaviorTree* AP_FPS::GetBehaviorTree_Implementation()
+{
+	return _BehaviourTree;
+}
+
 void AP_FPS::Handle_HealthDead(AController* causer)
 {
 }
@@ -86,5 +91,7 @@ void AP_FPS::Handle_HealthDead(AController* causer)
 void AP_FPS::Handle_HealthDamaged(float newHealth, float maxHealth, float changeInHealth)
 {
 	OnHealthChangedDelagate.Broadcast(newHealth,maxHealth,changeInHealth);
+	UE_LOG(LogTemp, Display, TEXT("Text"), changeInHealth);
+
 }
 

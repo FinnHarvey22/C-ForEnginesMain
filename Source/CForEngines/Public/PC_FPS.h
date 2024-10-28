@@ -40,6 +40,7 @@ protected:
 	void JumpReleased();
 	void FirePressed();
 	void FireReleased();
+	UFUNCTION()
 	void HealthChanged(float newHealth, float maxHealth, float changeInHealth);
 	
  
