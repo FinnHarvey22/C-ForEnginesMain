@@ -4,6 +4,13 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 
+TArray<AActor*> ActorsToIgnore;
+
+void AWeapon_Hitscan::BeginPlay()
+{
+	ActorsToIgnore.Add(GetOwner()); 
+	Super::BeginPlay();
+}
 void AWeapon_Hitscan::Fire()
 {
 	UWorld* const world = GetWorld();
@@ -11,8 +18,7 @@ void AWeapon_Hitscan::Fire()
 
 	FHitResult hit(ForceInit);
 	FVector start = _Muzzle->GetComponentLocation();
-	FVector end = start + (_Muzzle->GetForwardVector()*1000);
-	TArray<AActor*> ActorsToIgnore;
+	FVector end = start + (_Muzzle->GetForwardVector()*10000);
 
 	if (UKismetSystemLibrary::LineTraceSingle(world,start,end,
 		UEngineTypes::ConvertToTraceType(ECC_GameTraceChannel2),
@@ -27,3 +33,7 @@ void AWeapon_Hitscan::Fire()
 	
 	Super::Fire();
 }
+
+
+
+

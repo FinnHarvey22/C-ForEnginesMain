@@ -12,6 +12,7 @@ class CFORENGINES_API AWeapon_Hitscan : public AWeaponBase
 
 public:
 	virtual void Fire() override;
+	virtual void BeginPlay() override;
 
 protected:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)

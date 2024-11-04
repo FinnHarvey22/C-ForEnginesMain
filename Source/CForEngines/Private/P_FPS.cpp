@@ -47,7 +47,7 @@ void AP_FPS::Input_JumpReleased_Implementation()
 void AP_FPS::Input_Look_Implementation(FVector2D value)
 {
 	AddActorWorldRotation(FRotator(0.0f, value.X, 0.0f));
-	_Camera->AddLocalRotation(FRotator(value.Y, 0.0f, 0.0f));
+	//_Camera->AddLocalRotation(FRotator(value.Y, 0.0f, 0.0f));
 }
  
 void AP_FPS::Input_Move_Implementation(FVector2D value)
