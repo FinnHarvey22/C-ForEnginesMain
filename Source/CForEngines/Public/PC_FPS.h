@@ -42,9 +42,13 @@ protected:
 	void FireReleased();
 	UFUNCTION()
 	void HealthChanged(float newHealth, float maxHealth, float changeInHealth);
+	UFUNCTION()
+	void OnDeath();
 	
  
 	virtual void OnPossess(APawn* InPawn) override;
 	virtual void BeginPlay() override;
 	virtual void AddPoints_Implementation(int Score) override;
+	UFUNCTION()
+	virtual void SetAmmo_Implementation(int count) override;
 };

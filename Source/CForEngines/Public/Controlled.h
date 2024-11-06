@@ -24,5 +24,7 @@ class CFORENGINES_API IControlled
 public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void AddPoints(int Score);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void SetAmmo(int count);
 
 };

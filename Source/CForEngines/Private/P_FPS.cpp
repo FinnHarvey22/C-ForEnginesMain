@@ -32,7 +32,8 @@ void AP_FPS::Input_FireReleased_Implementation()
 	if(_WeaponRef)
 	{
 		_WeaponRef->StopFire();
-	}}
+	}
+}
  
 void AP_FPS::Input_JumpPressed_Implementation()
 {
@@ -77,6 +78,7 @@ void AP_FPS::BeginPlay()
 			_WeaponAttachPoint->GetComponentTransform(),spawnParams);
 		_WeaponRef->AttachToComponent(_WeaponAttachPoint,FAttachmentTransformRules::SnapToTargetIncludingScale);
 	}
+	_WeaponRef->OnFire.AddUniqueDynamic(this, &AP_FPS::AmmoChanged);
 }
 
 UBehaviorTree* AP_FPS::GetBehaviorTree_Implementation()
@@ -86,6 +88,7 @@ UBehaviorTree* AP_FPS::GetBehaviorTree_Implementation()
 
 void AP_FPS::Handle_HealthDead(AController* causer)
 {
+	OnDeathDelagate.Broadcast();
 }
 
 void AP_FPS::Handle_HealthDamaged(float newHealth, float maxHealth, float changeInHealth)
@@ -93,5 +96,10 @@ void AP_FPS::Handle_HealthDamaged(float newHealth, float maxHealth, float change
 	OnHealthChangedDelagate.Broadcast(newHealth,maxHealth,changeInHealth);
 	UE_LOG(LogTemp, Display, TEXT("Text"), changeInHealth);
 
+}
+
+void AP_FPS::AmmoChanged(int ammoAmount)
+{
+	OnAmmoChangedDelagate.Broadcast(ammoAmount);
 }
 

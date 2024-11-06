@@ -6,7 +6,7 @@
 
 class UArrowComponent;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponFireSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWeaponFireSignature, int, ammoCount);
 UCLASS(Abstract)
 class CFORENGINES_API AWeaponBase : public AActor
 {
@@ -20,6 +20,7 @@ public:
 	
 	void StartFire();
 	void StopFire();
+	
 
 protected:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly)
@@ -37,4 +38,11 @@ protected:
 	
 	UFUNCTION()
 	virtual void Fire();
+	UFUNCTION()
+	void FireDelayFinished();
+	int _AmmoCount;
+
+private:
+	bool _requestFire;
+	
 };

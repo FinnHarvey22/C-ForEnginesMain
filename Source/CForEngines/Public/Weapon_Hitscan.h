@@ -17,5 +17,6 @@ public:
 protected:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	float _Damage;
+	
 };
 

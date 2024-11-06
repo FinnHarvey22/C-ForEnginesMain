@@ -30,6 +30,11 @@ void APC_FPS::AddPoints_Implementation(int Score)
    _HUDWidget->UpdateScore(Score);
 }
 
+void APC_FPS::SetAmmo_Implementation(int count)
+{
+   _HUDWidget->UpdateAmmo(count);
+}
+
 void APC_FPS::SetupInputComponent()
 {
     Super::SetupInputComponent();
@@ -125,6 +130,11 @@ void APC_FPS::HealthChanged(float newHealth, float maxHealth, float changeInHeal
    
 }
 
+void APC_FPS::OnDeath()
+{
+   UE_LOG(LogTemp, Display, TEXT("You Have Died"));
+}
+
 
 void APC_FPS::OnPossess(APawn* InPawn)
 {
@@ -142,6 +152,8 @@ void APC_FPS::OnPossess(APawn* InPawn)
    if (AP_FPS* PlayerCharacter = Cast<AP_FPS>(GetPawn()))
    {
       PlayerCharacter->OnHealthChangedDelagate.AddUniqueDynamic(this, &APC_FPS::HealthChanged);
+      PlayerCharacter->OnDeathDelagate.AddUniqueDynamic(this, &APC_FPS::OnDeath);
+      PlayerCharacter->OnAmmoChangedDelagate.AddUniqueDynamic(this, &APC_FPS::SetAmmo_Implementation);
    }
 }
 
