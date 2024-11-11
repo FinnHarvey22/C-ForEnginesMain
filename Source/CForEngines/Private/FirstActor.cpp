@@ -39,6 +39,6 @@ void AFirstActor::BeginPlay()
 void AFirstActor::Handle_ColliderHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
                                      UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	UE_LOG(LogTemp, Display, TEXT("Hello!!!!!!!!!!!!!!!"));
+	//UE_LOG(LogTemp, Display, TEXT("Hello!!!!!!!!!!!!!!!"));
 }
 

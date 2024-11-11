@@ -7,7 +7,7 @@ AWeaponBase::AWeaponBase()
 	PrimaryActorTick.bCanEverTick = false;
 	_FireDelay = 0.5f;
 	_requestFire = false;
-	_AmmoCount = 10;
+	//_AmmoCount = 10;
 
 
 	_Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
@@ -38,12 +38,18 @@ void AWeaponBase::StopFire()
 	//GetWorld()->GetTimerManager().ClearTimer(_FireDelayTimer);
 }
 
+void AWeaponBase::AmmoUpdated(int AmmoChange)
+{
+	m_AmmoAmount += AmmoChange;
+	AmmoChanged.Broadcast(m_AmmoAmount);
+}
+
 void AWeaponBase::Fire()
 {
-	if (_AmmoCount > 0)
+	if (m_AmmoAmount > 0)
 	{
-		_AmmoCount--;
-		OnFire.Broadcast(_AmmoCount);
+		AmmoUpdated(-1);
+		OnFire.Broadcast();
 		if (_FireDelay != 0.0f)
 		{
 			GetWorld()->GetTimerManager().SetTimer(_FireDelayTimer,this, &AWeaponBase::FireDelayFinished, _FireDelay, false);
@@ -54,11 +60,24 @@ void AWeaponBase::Fire()
 
 void AWeaponBase::FireDelayFinished()
 {
-	if (_requestFire)
+	if (m_AmmoAmount > 0 )
 	{
-		Fire();
+		if (_requestFire)
+		{
+		
+			Fire();
+		
+		}
 	}
 }
+
+void AWeaponBase::BeginPlay()
+{
+	AmmoUpdated(0);
+	Super::BeginPlay();
+}
+
+
 
 
 

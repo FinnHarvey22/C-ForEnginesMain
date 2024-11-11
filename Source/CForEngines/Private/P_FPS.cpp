@@ -75,10 +75,11 @@ void AP_FPS::BeginPlay()
 		spawnParams.Owner = this;
 		spawnParams.Instigator = this;
 		_WeaponRef = GetWorld()->SpawnActor<AWeaponBase>(_DefaultWeapon,
-			_WeaponAttachPoint->GetComponentTransform(),spawnParams);
+		_WeaponAttachPoint->GetComponentTransform(),spawnParams);
 		_WeaponRef->AttachToComponent(_WeaponAttachPoint,FAttachmentTransformRules::SnapToTargetIncludingScale);
 	}
-	_WeaponRef->OnFire.AddUniqueDynamic(this, &AP_FPS::AmmoChanged);
+	_WeaponRef->AmmoChanged.AddUniqueDynamic(this, &AP_FPS::AmmoChanged);
+	
 }
 
 UBehaviorTree* AP_FPS::GetBehaviorTree_Implementation()
@@ -98,8 +99,14 @@ void AP_FPS::Handle_HealthDamaged(float newHealth, float maxHealth, float change
 
 }
 
-void AP_FPS::AmmoChanged(int ammoAmount)
+void AP_FPS::AmmoChanged(int Amount)
 {
-	OnAmmoChangedDelagate.Broadcast(ammoAmount);
+	OnAmmoChangedDelagate.Broadcast(Amount);
+	
+}
+
+void AP_FPS::AddAmmo(int ChangeInAmmo)
+{
+	_WeaponRef->AmmoUpdated(ChangeInAmmo);
 }
 

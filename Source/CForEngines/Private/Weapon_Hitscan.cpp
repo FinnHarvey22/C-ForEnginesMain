@@ -20,7 +20,8 @@ void AWeapon_Hitscan::Fire()
 	FVector start = _Muzzle->GetComponentLocation();
 	FVector end = start + (_Muzzle->GetForwardVector()*10000);
 
-	if (_AmmoCount > 0)
+	
+	if (m_AmmoAmount > 0 )
 	{
 		if (UKismetSystemLibrary::LineTraceSingle(world,start,end,
 			UEngineTypes::ConvertToTraceType(ECC_GameTraceChannel2),
@@ -33,6 +34,7 @@ void AWeapon_Hitscan::Fire()
 			UE_LOG(LogTemp, Display, TEXT("Hit Position:  %s"), *hit.ImpactPoint.ToString());
 		}
 	}
+	
 	Super::Fire();
 }
 

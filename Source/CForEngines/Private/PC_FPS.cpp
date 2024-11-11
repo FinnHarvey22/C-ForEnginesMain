@@ -20,7 +20,7 @@ void APC_FPS::BeginPlay()
       _HUDWidget->AddToViewport();
    }
 
-   
+
   
 }
 
@@ -32,6 +32,7 @@ void APC_FPS::AddPoints_Implementation(int Score)
 
 void APC_FPS::SetAmmo_Implementation(int count)
 {
+   
    _HUDWidget->UpdateAmmo(count);
 }
 
@@ -102,13 +103,15 @@ void APC_FPS::JumpReleased()
  
 void APC_FPS::FirePressed()
 {
-    if(APawn* currentPawn = GetPawn())
-    {
-       if(UKismetSystemLibrary::DoesImplementInterface(currentPawn, UInputable::StaticClass()))
-       {
-          IInputable::Execute_Input_FirePressed(currentPawn);
-       }
-    }
+ 
+      if(APawn* currentPawn = GetPawn())
+      {
+         if(UKismetSystemLibrary::DoesImplementInterface(currentPawn, UInputable::StaticClass()))
+         {
+            IInputable::Execute_Input_FirePressed(currentPawn);
+         }
+      }
+   
 }
  
 void APC_FPS::FireReleased()
@@ -134,6 +137,10 @@ void APC_FPS::OnDeath()
 {
    UE_LOG(LogTemp, Display, TEXT("You Have Died"));
 }
+
+
+
+
 
 
 void APC_FPS::OnPossess(APawn* InPawn)

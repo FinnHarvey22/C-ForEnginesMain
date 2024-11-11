@@ -13,7 +13,7 @@ class UCapsuleComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FPlayerOnHealthChangedSignature,float, newHealth, float, maxHealth, float, changeInHealth);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerOnDeathSignature);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerAmmoChangedSignature, int, ammoCount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerAmmoChangedSignature, int, AmmoChange);
 UCLASS(Abstract)
 class CFORENGINES_API AP_FPS : public ACharacter, public IInputable
 {
@@ -39,7 +39,10 @@ public:
 	FPlayerAmmoChangedSignature OnAmmoChangedDelagate;
 
 	virtual UBehaviorTree* GetBehaviorTree_Implementation() override;
-
+	UFUNCTION()
+	void AmmoChanged(int Amount);
+	UFUNCTION()
+	void AddAmmo(int ChangeInAmmo);
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<UCameraComponent> _Camera;
@@ -64,6 +67,6 @@ private:
 	void Handle_HealthDead(AController* causer);
 	UFUNCTION()
 	void Handle_HealthDamaged( float newHealth, float maxHealth, float changeInHealth);
-	UFUNCTION()
-	void AmmoChanged(int ammoAmount);
+	
+	
 };
