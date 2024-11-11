@@ -47,7 +47,10 @@ protected:
 	virtual void Fire();
 	UFUNCTION()
 	void FireDelayFinished();
+	UPROPERTY(VisibleDefaultsOnly,BlueprintReadOnly)
 	int m_AmmoAmount = 5;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int m_StartingAmmo = 50;
 	virtual void BeginPlay() override;
 	
 private:

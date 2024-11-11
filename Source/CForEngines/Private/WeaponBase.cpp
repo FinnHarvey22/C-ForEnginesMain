@@ -1,6 +1,8 @@
 ﻿#include "WeaponBase.h"
 
 #include "Components/ArrowComponent.h"
+#include <chrono>
+
 
 AWeaponBase::AWeaponBase()
 {
@@ -73,9 +75,13 @@ void AWeaponBase::FireDelayFinished()
 
 void AWeaponBase::BeginPlay()
 {
-	AmmoUpdated(0);
+	m_AmmoAmount = m_StartingAmmo;
+	
 	Super::BeginPlay();
+	
 }
+
+
 
 
 
