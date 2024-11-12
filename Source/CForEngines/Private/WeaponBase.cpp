@@ -48,21 +48,26 @@ void AWeaponBase::AmmoUpdated(int AmmoChange)
 
 void AWeaponBase::Fire()
 {
-	if (m_AmmoAmount > 0)
+	if (m_AmmoAmount > 0 && !_reloading && m_AmmoInGun > 0)
 	{
 		AmmoUpdated(-1);
 		OnFire.Broadcast();
+		m_AmmoInGun--;
 		if (_FireDelay != 0.0f)
 		{
 			GetWorld()->GetTimerManager().SetTimer(_FireDelayTimer,this, &AWeaponBase::FireDelayFinished, _FireDelay, false);
 		
 		}
 	}
+	else if (m_AmmoInGun == 0 && !_reloading)
+	{
+		StartReload();
+	}
 }
 
 void AWeaponBase::FireDelayFinished()
 {
-	if (m_AmmoAmount > 0 )
+	if (m_AmmoAmount > 0 && m_AmmoInGun > 0)
 	{
 		if (_requestFire)
 		{
@@ -71,19 +76,40 @@ void AWeaponBase::FireDelayFinished()
 		
 		}
 	}
+	else if (m_AmmoInGun <= 0 && m_AmmoAmount > 0)
+	{
+		//if(_requestFire)
+		//{
+		StartReload();
+		//}
+	}
 }
 
 void AWeaponBase::BeginPlay()
 {
 	m_AmmoAmount = m_StartingAmmo;
-	
+	GetWorldTimerManager().SetTimer(_InitTimer,this,&AWeaponBase::Init,0.2f,false);
 	Super::BeginPlay();
 	
 }
+void AWeaponBase::StartReload()
+{
+	_reloading = true;
+	GetWorld()->GetTimerManager().SetTimer(_ReloadTimer,this, &AWeaponBase::Reload, _ReloadDelay, false);
+
+}
+void AWeaponBase::Reload()
+{
+	m_AmmoInGun = 2;
+	_reloading = false;
+}
 
 
-
-
+void AWeaponBase::Init()
+{
+	AmmoChanged.Broadcast(m_AmmoAmount);
+}
+ 
 
 
 

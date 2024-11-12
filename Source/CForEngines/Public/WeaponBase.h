@@ -47,13 +47,25 @@ protected:
 	virtual void Fire();
 	UFUNCTION()
 	void FireDelayFinished();
+	UFUNCTION()
+	void Init();
+	UFUNCTION()
+	void Reload();
+	UFUNCTION()
+	void StartReload();
+	virtual void BeginPlay() override;
 	UPROPERTY(VisibleDefaultsOnly,BlueprintReadOnly)
 	int m_AmmoAmount = 5;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int m_StartingAmmo = 50;
-	virtual void BeginPlay() override;
+	int m_AmmoInGun = 2;
+	float _ReloadDelay = 1.0f;
+	bool _reloading;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float _Damage;
 	
 private:
 	bool _requestFire;
-	
+	FTimerHandle _InitTimer;
+	FTimerHandle _ReloadTimer;
 };

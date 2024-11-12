@@ -4,6 +4,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 
+
+
 TArray<AActor*> ActorsToIgnore;
 
 void AWeapon_Hitscan::BeginPlay()
@@ -18,21 +20,21 @@ void AWeapon_Hitscan::Fire()
 
 	FHitResult hit(ForceInit);
 	FVector start = _Muzzle->GetComponentLocation();
-	FVector end = start + (_Muzzle->GetForwardVector()*10000);
-
 	
-	if (m_AmmoAmount > 0 )
+	
+	if (m_AmmoAmount > 0 && !_reloading)
 	{
-		if (UKismetSystemLibrary::LineTraceSingle(world,start,end,
-			UEngineTypes::ConvertToTraceType(ECC_GameTraceChannel2),
-			false,ActorsToIgnore,EDrawDebugTrace::ForDuration,hit,true,
-			FLinearColor::Red,FLinearColor::Green,5))
+		for (int a = 0; a < m_NumberOfProjectiles; a++)
 		{
-			UGameplayStatics::ApplyDamage(hit.GetActor(), _Damage, GetOwner()->GetInstigatorController(),
-				GetOwner(), UDamageType::StaticClass());
-
-			UE_LOG(LogTemp, Display, TEXT("Hit Position:  %s"), *hit.ImpactPoint.ToString());
+			FVector ConedDirection =  FMath::VRandCone(_Muzzle->GetForwardVector(), FMath::DegreesToRadians(_ConeDegrees ) * 0.5);
+			FVector end = ConedDirection * 10000000;
+			if (UKismetSystemLibrary::LineTraceSingle(world,start,end,UEngineTypes::ConvertToTraceType(ECC_GameTraceChannel2),false,ActorsToIgnore,EDrawDebugTrace::ForDuration,hit,true,FLinearColor::Red,FLinearColor::Green,5))
+			{
+				UGameplayStatics::ApplyDamage(hit.GetActor(), _Damage, GetOwner()->GetInstigatorController(),GetOwner(), UDamageType::StaticClass());
+				UE_LOG(LogTemp, Display, TEXT("Hit Position:  %s"), *hit.ImpactPoint.ToString());
+			}
 		}
+		
 	}
 	
 	Super::Fire();

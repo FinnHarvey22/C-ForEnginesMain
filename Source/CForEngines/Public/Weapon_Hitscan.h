@@ -16,7 +16,10 @@ public:
 
 protected:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	float _Damage;
+	//float _Damage;
+	int m_NumberOfProjectiles = 7;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float _ConeDegrees = 7.5;
 	
 };
 
