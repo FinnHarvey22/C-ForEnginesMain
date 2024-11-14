@@ -28,10 +28,16 @@ protected:
 	float _MaxHealth;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	float _CurrentHealth;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool _HasIFrames = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool _IFramesActive = false;
+	FTimerHandle _IFrameTimer;
 	
 	virtual void BeginPlay() override;
 private:
 	UFUNCTION()
 	void DamageTaken(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
-	
+	UFUNCTION()
+	void IFrameTimerEnd();
 };

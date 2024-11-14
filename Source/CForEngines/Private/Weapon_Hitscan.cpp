@@ -1,8 +1,11 @@
 ﻿#include "Weapon_Hitscan.h"
 
+#include "BaseGizmos/GizmoElementShared.h"
 #include "Components/ArrowComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
+
+
 
 
 
@@ -31,7 +34,11 @@ void AWeapon_Hitscan::Fire()
 			if (UKismetSystemLibrary::LineTraceSingle(world,start,end,UEngineTypes::ConvertToTraceType(ECC_GameTraceChannel2),false,ActorsToIgnore,EDrawDebugTrace::ForDuration,hit,true,FLinearColor::Red,FLinearColor::Green,5))
 			{
 				UGameplayStatics::ApplyDamage(hit.GetActor(), _Damage, GetOwner()->GetInstigatorController(),GetOwner(), UDamageType::StaticClass());
+				UGameplayStatics::SpawnEmitterAtLocation(world, _HitRegister,hit.ImpactPoint,hit.ImpactPoint.Rotation(), FVector(1,1,1),true,EPSCPoolMethod::None, true);
 				UE_LOG(LogTemp, Display, TEXT("Hit Position:  %s"), *hit.ImpactPoint.ToString());
+
+			
+				
 			}
 		}
 		
