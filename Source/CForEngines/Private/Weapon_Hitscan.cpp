@@ -31,7 +31,7 @@ void AWeapon_Hitscan::Fire()
 		{
 			FVector ConedDirection =  FMath::VRandCone(_Muzzle->GetForwardVector(), FMath::DegreesToRadians(_ConeDegrees ) * 0.5);
 			FVector end = ConedDirection * 10000000;
-			if (UKismetSystemLibrary::LineTraceSingle(world,start,end,UEngineTypes::ConvertToTraceType(ECC_GameTraceChannel2),false,ActorsToIgnore,EDrawDebugTrace::ForDuration,hit,true,FLinearColor::Red,FLinearColor::Green,5))
+			if (UKismetSystemLibrary::LineTraceSingle(world,start,end,UEngineTypes::ConvertToTraceType(ECC_GameTraceChannel2),false,ActorsToIgnore,EDrawDebugTrace::ForDuration,hit,true,FLinearColor::Red,FLinearColor::Green,0.2))
 			{
 				UGameplayStatics::ApplyDamage(hit.GetActor(), _Damage, GetOwner()->GetInstigatorController(),GetOwner(), UDamageType::StaticClass());
 				UGameplayStatics::SpawnEmitterAtLocation(world, _HitRegister,hit.ImpactPoint,hit.ImpactPoint.Rotation(), FVector(1,1,1),true,EPSCPoolMethod::None, true);
