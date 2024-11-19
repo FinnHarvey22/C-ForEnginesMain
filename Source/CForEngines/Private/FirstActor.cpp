@@ -6,6 +6,7 @@
 #include "Components/ArrowComponent.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/RotatingMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Preferences/PersonaOptions.h"
 
 
@@ -39,6 +40,7 @@ void AFirstActor::BeginPlay()
 void AFirstActor::Handle_ColliderHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
                                      UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	//UE_LOG(LogTemp, Display, TEXT("Hello!!!!!!!!!!!!!!!"));
+	UGameplayStatics::ApplyDamage(OtherActor, _Damage, GetInstigatorController(),
+			this, UDamageType::StaticClass());
 }
 

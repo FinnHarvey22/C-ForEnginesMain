@@ -44,6 +44,7 @@ protected:
 	void HealthChanged(float newHealth, float maxHealth, float changeInHealth);
 	UFUNCTION()
 	void OnDeath();
+	bool Dead = false;
 
 
  

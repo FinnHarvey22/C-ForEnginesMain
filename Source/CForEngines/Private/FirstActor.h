@@ -34,7 +34,7 @@ protected:
 	
 	UFUNCTION()
 	void Handle_ColliderHit( UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit );
-
+	float _Damage = 10.0f;
 
 };
 

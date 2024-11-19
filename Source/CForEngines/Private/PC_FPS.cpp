@@ -136,6 +136,7 @@ void APC_FPS::HealthChanged(float newHealth, float maxHealth, float changeInHeal
 void APC_FPS::OnDeath()
 {
    UE_LOG(LogTemp, Display, TEXT("You Have Died"));
+   
 }
 
 
