@@ -55,6 +55,7 @@ void APC_FPS::SetupInputComponent()
        //EIP->BindAction(_JumpAction, ETriggerEvent::Completed, this, &APC_FPS::JumpReleased);
        EIP->BindAction(_FireAction, ETriggerEvent::Triggered, this, &APC_FPS::FirePressed);
        EIP->BindAction(_FireAction, ETriggerEvent::Completed, this, &APC_FPS::FireReleased);
+       EIP->BindAction(_FlipAction, ETriggerEvent::Triggered, this, &APC_FPS::FlipPressed);
     }
 }
  
@@ -130,6 +131,17 @@ void APC_FPS::FireReleased()
           IInputable::Execute_Input_FireReleased(currentPawn);
        }
     }
+}
+
+void APC_FPS::FlipPressed()
+{
+   if (APawn* currentPawn = GetPawn())
+   {
+      if (UKismetSystemLibrary::DoesImplementInterface(currentPawn,UInputable::StaticClass()))
+      {
+         IInputable::Execute_Input_FlipPressed(currentPawn);
+      }
+   }
 }
 
 void APC_FPS::HealthChanged(float newHealth, float maxHealth, float changeInHealth)

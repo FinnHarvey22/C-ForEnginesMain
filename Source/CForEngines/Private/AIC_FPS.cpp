@@ -2,10 +2,10 @@
  
 #include "Inputable.h"
 #include "BehaviorTree/BlackboardComponent.h"
-#include "EnvironmentQuery/EnvQueryManager.h"
+//#include "EnvironmentQuery/EnvQueryManager.h"
 #include "Kismet/KismetSystemLibrary.h"
 //#include "kismet/GameplayStatics.h"
-#include "EnvironmentQuery/EnvQueryTypes.h"
+//#include "EnvironmentQuery/EnvQueryTypes.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISenseConfig_Sight.h"
 
@@ -44,8 +44,8 @@ void AAIC_FPS::BeginPlay()
 	_Blackboard = GetBlackboardComponent();
 	_AIPerception->OnTargetPerceptionUpdated.AddUniqueDynamic(this, &AAIC_FPS::Handle_TargetPerceptionUpdated);
 
-	FEnvQueryRequest EQR_FindWanderTarget = FEnvQueryRequest(_EQS_FindWanderTarget, GetPawn());
-	EQR_FindWanderTarget.Execute(EEnvQueryRunMode::RandomBest25Pct, this, &AAIC_FPS::Handle_FindWanderTargetResult);
+	/*FEnvQueryRequest EQR_FindWanderTarget = FEnvQueryRequest(_EQS_FindWanderTarget, GetPawn());
+	EQR_FindWanderTarget.Execute(EEnvQueryRunMode::RandomBest25Pct, this, &AAIC_FPS::Handle_FindWanderTargetResult);*/
 }
  
 void AAIC_FPS::OnPossess(APawn* InPawn)
@@ -73,10 +73,10 @@ void AAIC_FPS::Handle_TargetPerceptionUpdated(AActor* Actor, FAIStimulus Stimulu
 	}
 }
 
- void AAIC_FPS::Handle_FindWanderTargetResult(TSharedPtr<FEnvQueryResult> result)
+ /*void AAIC_FPS::Handle_FindWanderTargetResult(TSharedPtr<FEnvQueryResult> result)
  {
  	if(result->IsSuccessful())
  	{
  		_Blackboard->SetValueAsVector("TargetLocation", result->GetItemAsLocation(0));
 	}
- }
+ }*/

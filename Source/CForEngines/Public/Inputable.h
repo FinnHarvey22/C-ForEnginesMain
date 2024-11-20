@@ -31,6 +31,8 @@ public:
 	void Input_FirePressed();
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void Input_FireReleased();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void Input_FlipPressed();
     
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	UInputMappingContext* GetMappingContext();

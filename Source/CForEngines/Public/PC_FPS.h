@@ -25,10 +25,12 @@ protected:
 	TObjectPtr<UInputAction> _LookAction;
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputAction> _MoveAction;
-	UPROPERTY(EditAnywhere, Category="Input")
-	TObjectPtr<UInputAction> _JumpAction;
+	//UPROPERTY(EditAnywhere, Category="Input")
+	//TObjectPtr<UInputAction> _JumpAction;
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputAction> _FireAction;
+	UPROPERTY(EditAnywhere, Category="Input")
+	TObjectPtr<UInputAction> _FlipAction;
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UWidget_HUD> _HUDWidgetClass;
@@ -43,6 +45,7 @@ protected:
 	// void JumpReleased();
 	void FirePressed();
 	void FireReleased();
+	void FlipPressed();
 	UFUNCTION()
 	void HealthChanged(float newHealth, float maxHealth, float changeInHealth);
 	UFUNCTION()

@@ -53,7 +53,8 @@ void AGM_FPS::HandleMatchIsWaitingToStart()
 	}
 	
 	
-	GetWorld()->GetTimerManager().SetTimer(_TimerDecreaseCountdown,this,&AGM_FPS::DecreaseCountdown,1.f,false);
+	//GetWorld()->GetTimerManager().SetTimer(_TimerDecreaseCountdown,this,&AGM_FPS::DecreaseCountdown,1.f,false);
+	StartMatch();
 	Super::HandleMatchIsWaitingToStart();
 }
  

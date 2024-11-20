@@ -2,6 +2,7 @@
 
  
 #include "HealthComponent.h"
+#include "SwapTexture.h"
 #include "WeaponBase.h"
 #include "Camera/CameraComponent.h"
  
@@ -56,7 +57,12 @@ void AP_FPS::Input_Move_Implementation(FVector2D value)
 	AddMovementInput(FVector::VectorPlaneProject(_Camera->GetForwardVector(), FVector::UpVector).GetSafeNormal(), value.Y);
 	AddMovementInput(_Camera->GetRightVector(), value.X);
 }
- 
+
+void AP_FPS::Input_FlipPressed_Implementation()
+{
+	ISwapTexture::Execute_FlipTexture(this, true);
+}
+
 UInputMappingContext* AP_FPS::GetMappingContext_Implementation()
 {
 	return _InputMapping;
