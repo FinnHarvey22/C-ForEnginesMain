@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SwapTexture.h"
 #include "GameFramework/Actor.h"
 #include "InvisibleObjects.generated.h"
 
@@ -26,6 +25,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<UBoxComponent> _Collider;
 	virtual void BeginPlay() override;
+
+	UFUNCTION()
+	void FlipTexture();
 
 
 

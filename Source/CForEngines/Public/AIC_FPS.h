@@ -29,8 +29,8 @@ protected:
 	TObjectPtr<UAIPerceptionComponent> _AIPerception;
 	TObjectPtr<UAISenseConfig_Sight> _AISense_Sight;
 
-	//UPROPERTY(EditAnywhere)
-	//TObjectPtr<UEnvQuery> _EQS_FindWanderTarget;
+	UPROPERTY(EditAnywhere)
+	TObjectPtr<UEnvQuery> _EQS_FindWanderTarget;
 	TObjectPtr<UBlackboardComponent> _Blackboard;
 
 private:
@@ -38,7 +38,7 @@ private:
 	void Handle_TargetPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus);
 
 	//UFUNCTION()
-	//void Handle_FindWanderTargetResult(TSharedPtr<FEnvQueryResult> result);
+	void Handle_FindWanderTargetResult(TSharedPtr<FEnvQueryResult> result);
 	
 	
 };

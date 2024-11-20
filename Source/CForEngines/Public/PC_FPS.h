@@ -51,6 +51,10 @@ protected:
 	UFUNCTION()
 	void OnDeath();
 	bool Dead = false;
+	bool _PostProcessingEnabled;
+
+	UPROPERTY(EditAnywhere, Category = "DataLayer")
+	TObjectPtr<const UDataLayerAsset> _InvisibleObjectsDataLayer;
 
 
  

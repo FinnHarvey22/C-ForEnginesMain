@@ -2,7 +2,6 @@
  
 #include "CoreMinimal.h"
 #include "Inputable.h"
-#include "SwapTexture.h"
 #include "GameFramework/Character.h"
 #include "P_FPS.generated.h"
 
@@ -15,9 +14,8 @@ class UCapsuleComponent;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FPlayerOnHealthChangedSignature,float, newHealth, float, maxHealth, float, changeInHealth);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerOnDeathSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerAmmoChangedSignature, int, AmmoChange);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerOnFlipPressedSignature);
 UCLASS(Abstract)
-class CFORENGINES_API AP_FPS : public ACharacter, public IInputable, public ISwapTexture
+class CFORENGINES_API AP_FPS : public ACharacter, public IInputable
 {
 	GENERATED_BODY()
  
@@ -30,7 +28,7 @@ public:
 	// virtual void Input_JumpReleased_Implementation() override;
 	virtual void Input_Look_Implementation(FVector2D value) override;
 	virtual void Input_Move_Implementation(FVector2D value) override;
-	virtual void Input_FlipPressed_Implementation() override;
+	
     
 	virtual UInputMappingContext* GetMappingContext_Implementation() override;
 	void BeginPlay();
@@ -40,8 +38,6 @@ public:
 	FPlayerOnDeathSignature OnDeathDelagate;
 	UPROPERTY(BlueprintAssignable)
 	FPlayerAmmoChangedSignature OnAmmoChangedDelagate;
-	UPROPERTY(BlueprintAssignable)
-	FPlayerOnFlipPressedSignature OnFlipPressedDelagate;
 
 	virtual UBehaviorTree* GetBehaviorTree_Implementation() override;
 	UFUNCTION()

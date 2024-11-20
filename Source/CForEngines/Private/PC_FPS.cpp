@@ -9,6 +9,7 @@
 #include "CForEngines/Public/Inputable.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "WorldPartition/DataLayer/DataLayerSubsystem.h"
 
 
 void APC_FPS::BeginPlay()
@@ -55,7 +56,7 @@ void APC_FPS::SetupInputComponent()
        //EIP->BindAction(_JumpAction, ETriggerEvent::Completed, this, &APC_FPS::JumpReleased);
        EIP->BindAction(_FireAction, ETriggerEvent::Triggered, this, &APC_FPS::FirePressed);
        EIP->BindAction(_FireAction, ETriggerEvent::Completed, this, &APC_FPS::FireReleased);
-       EIP->BindAction(_FlipAction, ETriggerEvent::Triggered, this, &APC_FPS::FlipPressed);
+       EIP->BindAction(_FlipAction, ETriggerEvent::Started, this, &APC_FPS::FlipPressed);
     }
 }
  
@@ -133,13 +134,25 @@ void APC_FPS::FireReleased()
     }
 }
 
+
+
 void APC_FPS::FlipPressed()
 {
-   if (APawn* currentPawn = GetPawn())
+   UE_LOG(LogTemp, Display, TEXT("Function Running"));
+   if(UDataLayerSubsystem* DataLayerSubsystem = UWorld::GetSubsystem<UDataLayerSubsystem>(GetWorld()))
    {
-      if (UKismetSystemLibrary::DoesImplementInterface(currentPawn,UInputable::StaticClass()))
+      UE_LOG(LogTemp, Display, TEXT("Got DatalayerSubsystem"));
+      if (_PostProcessingEnabled)
       {
-         IInputable::Execute_Input_FlipPressed(currentPawn);
+         DataLayerSubsystem->SetDataLayerInstanceRuntimeState(_InvisibleObjectsDataLayer, EDataLayerRuntimeState::Unloaded);
+         _PostProcessingEnabled = !_PostProcessingEnabled;
+         UE_LOG(LogTemp, Display, TEXT("Post Processing disabled" ));
+      }
+      else if (!_PostProcessingEnabled)
+      {
+        DataLayerSubsystem->SetDataLayerInstanceRuntimeState(_InvisibleObjectsDataLayer, EDataLayerRuntimeState::Activated);
+         _PostProcessingEnabled = !_PostProcessingEnabled;
+         UE_LOG(LogTemp, Display, TEXT("Post Processing Enabled"));
       }
    }
 }

@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SwapTexture.h"
 #include "GameFramework/Actor.h"
 #include "PostProcessingManager.generated.h"
 
@@ -17,7 +16,7 @@ public:
 	APostProcessingManager();
 
 protected:
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	APostProcessVolume* _PostProcessVolume;
 
 	void FlipTexture();

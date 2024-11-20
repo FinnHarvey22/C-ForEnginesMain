@@ -13,8 +13,8 @@ APostProcessingManager::APostProcessingManager()
 
 void APostProcessingManager::FlipTexture()
 {
-	_PostProcessVolume->bEnabled(false);
-	_PostProcessVolume->bEnabled(true);
+//	_PostProcessVolume->bEnabled(false);
+	//_PostProcessVolume->bEnabled(true);
 }
 
 
