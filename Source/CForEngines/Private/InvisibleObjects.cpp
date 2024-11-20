@@ -18,7 +18,7 @@ AInvisibleObjects::AInvisibleObjects()
 
 	_Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	_Mesh->SetupAttachment(_Collider);
-	
+	AP_FPS::OnFlipPressedDelagate.AddUniqueDynamic(this, &AInvisibleObjects::BeginPlay)
 
 }
 
