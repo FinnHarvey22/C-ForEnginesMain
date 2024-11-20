@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Controlled.h"
+#include "GenericTeamAgentInterface.h"
 #include "GameFramework/PlayerController.h"
 #include "PC_FPS.generated.h"
 
@@ -13,10 +14,12 @@ struct FInputActionValue;
 class UInputAction;
  
 UCLASS(Abstract)
-class CFORENGINES_API APC_FPS : public APlayerController, public IControlled
+class CFORENGINES_API APC_FPS : public APlayerController, public IControlled, public IGenericTeamAgentInterface
 {
 	GENERATED_BODY()
- 
+
+public:
+	virtual  FGenericTeamId GetGenericTeamId() const override;
 protected:
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputAction> _LookAction;
@@ -36,8 +39,8 @@ protected:
  
 	void Look(const FInputActionValue& value);
 	void Move(const FInputActionValue& value);
-	void JumpPressed();
-	void JumpReleased();
+	// void JumpPressed();
+	// void JumpReleased();
 	void FirePressed();
 	void FireReleased();
 	UFUNCTION()

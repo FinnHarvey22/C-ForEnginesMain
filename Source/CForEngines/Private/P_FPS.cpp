@@ -35,15 +35,15 @@ void AP_FPS::Input_FireReleased_Implementation()
 	}
 }
  
-void AP_FPS::Input_JumpPressed_Implementation()
-{
-	ACharacter::Jump();
-}
+// void AP_FPS::Input_JumpPressed_Implementation()
+// {
+// 	ACharacter::Jump();
+// }
  
-void AP_FPS::Input_JumpReleased_Implementation()
-{
-	ACharacter::StopJumping();
-}
+// void AP_FPS::Input_JumpReleased_Implementation()
+// {
+// 	ACharacter::StopJumping();
+// }
  
 void AP_FPS::Input_Look_Implementation(FVector2D value)
 {

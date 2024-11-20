@@ -36,6 +36,13 @@ void APC_FPS::SetAmmo_Implementation(int count)
    _HUDWidget->UpdateAmmo(count);
 }
 
+FGenericTeamId APC_FPS::GetGenericTeamId() const
+{
+  
+   FGenericTeamId _teamID = FGenericTeamId(2);
+   return  _teamID;
+}
+
 void APC_FPS::SetupInputComponent()
 {
     Super::SetupInputComponent();
@@ -44,8 +51,8 @@ void APC_FPS::SetupInputComponent()
     {
        EIP->BindAction(_LookAction, ETriggerEvent::Triggered, this, &APC_FPS::Look);
        EIP->BindAction(_MoveAction, ETriggerEvent::Triggered, this, &APC_FPS::Move);
-       EIP->BindAction(_JumpAction, ETriggerEvent::Triggered, this, &APC_FPS::JumpPressed);
-       EIP->BindAction(_JumpAction, ETriggerEvent::Completed, this, &APC_FPS::JumpReleased);
+       //EIP->BindAction(_JumpAction, ETriggerEvent::Triggered, this, &APC_FPS::JumpPressed);
+       //EIP->BindAction(_JumpAction, ETriggerEvent::Completed, this, &APC_FPS::JumpReleased);
        EIP->BindAction(_FireAction, ETriggerEvent::Triggered, this, &APC_FPS::FirePressed);
        EIP->BindAction(_FireAction, ETriggerEvent::Completed, this, &APC_FPS::FireReleased);
     }
@@ -79,27 +86,27 @@ void APC_FPS::Move(const FInputActionValue& value)
     }
 }
  
-void APC_FPS::JumpPressed()
-{
-    if(APawn* currentPawn = GetPawn())
-    {
-       if(UKismetSystemLibrary::DoesImplementInterface(currentPawn, UInputable::StaticClass()))
-       {
-          IInputable::Execute_Input_JumpPressed(currentPawn);
-       }
-    }
-}
+// void APC_FPS::JumpPressed()
+// {
+//     if(APawn* currentPawn = GetPawn())
+//     {
+//        if(UKismetSystemLibrary::DoesImplementInterface(currentPawn, UInputable::StaticClass()))
+//        {
+//           IInputable::Execute_Input_JumpPressed(currentPawn);
+//        }
+//     }
+// }
  
-void APC_FPS::JumpReleased()
-{
-    if(APawn* currentPawn = GetPawn())
-    {
-       if(UKismetSystemLibrary::DoesImplementInterface(currentPawn, UInputable::StaticClass()))
-       {
-          IInputable::Execute_Input_JumpReleased(currentPawn);
-       }
-    }
-}
+// void APC_FPS::JumpReleased()
+// {
+//     if(APawn* currentPawn = GetPawn())
+//     {
+//        if(UKismetSystemLibrary::DoesImplementInterface(currentPawn, UInputable::StaticClass()))
+//        {
+//           IInputable::Execute_Input_JumpReleased(currentPawn);
+//        }
+//     }
+// }
  
 void APC_FPS::FirePressed()
 {
