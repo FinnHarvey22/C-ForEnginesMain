@@ -145,12 +145,14 @@ void APC_FPS::FlipPressed()
       if (_PostProcessingEnabled)
       {
          DataLayerSubsystem->SetDataLayerInstanceRuntimeState(_InvisibleObjectsDataLayer, EDataLayerRuntimeState::Unloaded);
+         DataLayerSubsystem->SetDataLayerInstanceRuntimeState(_VisibleObjectsDataLayer, EDataLayerRuntimeState::Activated);
          _PostProcessingEnabled = !_PostProcessingEnabled;
          UE_LOG(LogTemp, Display, TEXT("Post Processing disabled" ));
       }
       else if (!_PostProcessingEnabled)
       {
         DataLayerSubsystem->SetDataLayerInstanceRuntimeState(_InvisibleObjectsDataLayer, EDataLayerRuntimeState::Activated);
+        DataLayerSubsystem->SetDataLayerInstanceRuntimeState(_VisibleObjectsDataLayer, EDataLayerRuntimeState::Unloaded);
          _PostProcessingEnabled = !_PostProcessingEnabled;
          UE_LOG(LogTemp, Display, TEXT("Post Processing Enabled"));
       }

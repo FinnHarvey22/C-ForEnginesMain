@@ -55,6 +55,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "DataLayer")
 	TObjectPtr<const UDataLayerAsset> _InvisibleObjectsDataLayer;
+	UPROPERTY(EditAnywhere, Category = "DataLayer")
+	TObjectPtr<const UDataLayerAsset> _VisibleObjectsDataLayer;
+	
 
 
  
