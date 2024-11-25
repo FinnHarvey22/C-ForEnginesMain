@@ -4,6 +4,7 @@
 #include "GameFramework/Actor.h"
 #include "FirstActor.generated.h"
 
+class UHealthComponent;
 class UBoxComponent;
 class URotatingMovementComponent;
 class UArrowComponent;
@@ -23,6 +24,8 @@ protected:
 	TObjectPtr<UStaticMeshComponent> _Mesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<UArrowComponent> _Arrow;
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	TObjectPtr<UHealthComponent> _Health;
 	//UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	//TObjectPtr<URotatingMovementComponent> _RotatingMovementComponent;
 

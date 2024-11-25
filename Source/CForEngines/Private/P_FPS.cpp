@@ -91,6 +91,7 @@ UBehaviorTree* AP_FPS::GetBehaviorTree_Implementation()
 
 void AP_FPS::Handle_HealthDead(AController* causer)
 {
+	
 	OnDeathDelagate.Broadcast();
 }
 

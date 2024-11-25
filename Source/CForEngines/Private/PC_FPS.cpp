@@ -3,12 +3,14 @@
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "PersistantData.h"
 #include "P_FPS.h"
 #include "Widget_HUD.h"
 #include "Blueprint/UserWidget.h"
 #include "CForEngines/Public/Inputable.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Settings/EditorProjectSettings.h"
 #include "WorldPartition/DataLayer/DataLayerSubsystem.h"
 
 
@@ -20,20 +22,21 @@ void APC_FPS::BeginPlay()
       _HUDWidget = CreateWidget<UWidget_HUD, APC_FPS*>( this, _HUDWidgetClass.Get());
       _HUDWidget->AddToViewport();
    }
-
+   PersistantDataInstance = Cast<UPersistantData>(UGameplayStatics::GetGameInstance(GetWorld()));
+   SetAmmo_Implementation(0);
 
   
 }
 
 void APC_FPS::AddPoints_Implementation(int Score)
 {
+   PersistantDataInstance->CurrentScore += Score;
    
-   _HUDWidget->UpdateScore(Score);
+   _HUDWidget->UpdateScore(PersistantDataInstance->CurrentScore);
 }
 
 void APC_FPS::SetAmmo_Implementation(int count)
 {
-   
    _HUDWidget->UpdateAmmo(count);
 }
 
@@ -69,7 +72,10 @@ void APC_FPS::Look(const FInputActionValue& value)
        
        if(UKismetSystemLibrary::DoesImplementInterface(currentPawn, UInputable::StaticClass()))
        {
+          if (!Dead)
+          {
           IInputable::Execute_Input_Look(currentPawn, LookVector);
+          }
           
        }
     }
@@ -83,7 +89,10 @@ void APC_FPS::Move(const FInputActionValue& value)
     {
        if(UKismetSystemLibrary::DoesImplementInterface(currentPawn, UInputable::StaticClass()))
        {
-          IInputable::Execute_Input_Move(currentPawn, MoveVector);
+          if (!Dead)
+          {
+           IInputable::Execute_Input_Move(currentPawn, MoveVector);
+          }
        }
     }
 }
@@ -117,7 +126,11 @@ void APC_FPS::FirePressed()
       {
          if(UKismetSystemLibrary::DoesImplementInterface(currentPawn, UInputable::StaticClass()))
          {
+            if (!Dead)
+            {
             IInputable::Execute_Input_FirePressed(currentPawn);
+               
+            }
          }
       }
    
@@ -129,7 +142,11 @@ void APC_FPS::FireReleased()
     {
        if(UKismetSystemLibrary::DoesImplementInterface(currentPawn, UInputable::StaticClass()))
        {
+          if (!Dead)
+          {
           IInputable::Execute_Input_FireReleased(currentPawn);
+             
+          }
        }
     }
 }
@@ -169,13 +186,11 @@ void APC_FPS::HealthChanged(float newHealth, float maxHealth, float changeInHeal
 
 void APC_FPS::OnDeath()
 {
-   UE_LOG(LogTemp, Display, TEXT("You Have Died"));
+   Dead = true;
+   UE_LOG(LogTemp, Display, TEXT("You Have Died")); 
    
+   UGameplayStatics::OpenLevel(GetWorld(),TEXT("Level2"),false);
 }
-
-
-
-
 
 
 void APC_FPS::OnPossess(APawn* InPawn)
@@ -204,3 +219,4 @@ void APC_FPS::OnPossess(APawn* InPawn)
 
 
 
+          

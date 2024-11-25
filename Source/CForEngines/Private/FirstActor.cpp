@@ -3,6 +3,7 @@
 
 #include "FirstActor.h"
 
+#include "HealthComponent.h"
 #include "Components/ArrowComponent.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/RotatingMovementComponent.h"
@@ -21,6 +22,8 @@ AFirstActor::AFirstActor()
 
 	_Arrow = CreateDefaultSubobject<UArrowComponent>(TEXT("Arrow"));
 	_Arrow->SetupAttachment(_Collider);
+
+	_Health = CreateDefaultSubobject<UHealthComponent>(TEXT("Health"));
 
 	//_RotatingMovementComponent = CreateDefaultSubobject<URotatingMovementComponent>(TEXT("RotatingMovement"));
 	//_RotatingMovementComponent->Deactivate();

@@ -9,6 +9,7 @@
 #include "PC_FPS.generated.h"
 
 
+class UPersistantData;
 class UWidget_HUD;
 struct FInputActionValue;
 class UInputAction;
@@ -58,7 +59,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "DataLayer")
 	TObjectPtr<const UDataLayerAsset> _VisibleObjectsDataLayer;
 	
-
+	UPersistantData* PersistantDataInstance;
 
  
 	virtual void OnPossess(APawn* InPawn) override;

@@ -20,7 +20,7 @@ void UWidget_HUD::UpdateHealth(float newHealthRatio)
  
 void UWidget_HUD::UpdateScore(int newScore)
 {
-	currentScore += newScore;
+
 	if(ScoreText)
 	{
 		ScoreText->SetText(
