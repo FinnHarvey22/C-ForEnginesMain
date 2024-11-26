@@ -25,7 +25,7 @@ void UWidget_HUD::UpdateScore(int newScore)
 	{
 		ScoreText->SetText(
 		   FText::FromString(
-			  FString::Printf(TEXT("Score: %d"), currentScore)
+			  FString::Printf(TEXT("Score: %d"), newScore)
 		   )
 		);
 	}

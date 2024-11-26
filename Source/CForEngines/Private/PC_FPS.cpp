@@ -10,7 +10,6 @@
 #include "CForEngines/Public/Inputable.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "Settings/EditorProjectSettings.h"
 #include "WorldPartition/DataLayer/DataLayerSubsystem.h"
 
 
@@ -24,6 +23,7 @@ void APC_FPS::BeginPlay()
    }
    PersistantDataInstance = Cast<UPersistantData>(UGameplayStatics::GetGameInstance(GetWorld()));
    SetAmmo_Implementation(0);
+   AddPoints_Implementation(0);
 
   
 }

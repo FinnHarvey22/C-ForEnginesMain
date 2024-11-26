@@ -6,7 +6,10 @@
 #include "Blueprint/UserWidget.h"
 #include "Widget_WinScreen.generated.h"
 
-	class UButton;
+class UPersistantData;
+class UTextBlock;
+class UButton;
+
 UCLASS()
 class CFORENGINES_API UWidget_WinScreen : public UUserWidget
 {
@@ -16,19 +19,25 @@ protected:
 
 	
 	virtual void NativeConstruct() override;
+	virtual void NativePreConstruct() override;
 
-
+	UPersistantData* PersistantDataInstance;
 private:
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> RestartButton;
+	TObjectPtr<UButton> _RestartButton;
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> QuitButton;
+	TObjectPtr<UButton> _QuitButton;
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UTextBlock> _ScoreText;
 
 	
 	UFUNCTION()
 	void RestartButtonPressed();
 	UFUNCTION()
 	void QuitButtonPressed();
+
+int CurrentScore;
+	
 };
 
 // Fill out your copyright notice in the Description page of Project Settings.

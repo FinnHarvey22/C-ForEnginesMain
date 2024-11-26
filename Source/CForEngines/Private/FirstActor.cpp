@@ -6,9 +6,8 @@
 #include "HealthComponent.h"
 #include "Components/ArrowComponent.h"
 #include "Components/BoxComponent.h"
-#include "GameFramework/RotatingMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
-#include "Preferences/PersonaOptions.h"
+
 
 
 // Sets default values
